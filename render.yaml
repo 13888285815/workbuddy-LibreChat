@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: librechat
+    env: node
+    buildCommand: |
+      npm install --legacy-peer-deps
+      npm run frontend
+    startCommand: npm run backend
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: DOMAIN_CLIENT
+        value: https://librechat.onrender.com
+      - key: DOMAIN_SERVER
+        value: https://librechat.onrender.com
+      - key: NO_INDEX
+        value: "true"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: MEILI_MASTER_KEY
+        generateValue: true
+      - key: CREDS_KEY
+        generateValue: true
+      - key: CREDS_IV
+        generateValue: true
