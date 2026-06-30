@@ -1,0 +1,24 @@
+[build]
+builder = "DOCKERFILE"
+dockerfile = "Dockerfile"
+
+[deploy]
+startCommand = "npm run backend"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+
+[[services]]
+name = "librechat"
+
+  [services.env]
+  NODE_ENV = "production"
+  HOST = "0.0.0.0"
+  PORT = "8080"
+  MONGO_URI = "${{MONGO_URI}}"
+  REDIS_URI = "${{REDIS_URI}}"
+  DOMAIN_CLIENT = "${{RAILWAY_PUBLIC_DOMAIN}}"
+  DOMAIN_SERVER = "${{RAILWAY_PUBLIC_DOMAIN}}"
+
+[volume]
+mountPath = "/app/uploads"
+name = "librechat-uploads"
