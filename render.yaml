@@ -2,17 +2,24 @@ services:
   - type: web
     name: librechat
     env: node
+    region: singapore
     buildCommand: |
       npm install --legacy-peer-deps
       npm run frontend
     startCommand: npm run backend
+    healthCheckPath: /
     envVars:
+      - key: NODE_ENV
+        value: production
       - key: HOST
         value: 0.0.0.0
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        sync: false
+        value: mongodb+srv://librechat_user:al-vyJ6-suCrDyk8mwEmSghmswaSm8hroMvOB3c-qNFiOI@cluster0.eyhfc.mongodb.net/LibreChat?retryWrites=true&w=majority
+      # Redis optional - LibreChat can run without it
+      # - key: REDIS_URL
+      #   value: redis://localhost:6379
       - key: DOMAIN_CLIENT
         value: https://librechat.onrender.com
       - key: DOMAIN_SERVER
